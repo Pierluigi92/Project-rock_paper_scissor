@@ -1,24 +1,24 @@
 function getComputerChoice() {
     let numRand = Math.floor(Math.random()* 3);
     if ( numRand === 0 ) { 
-        return 'sasso'; 
+        return 'rock'; 
     } else if ( numRand === 1 ) { 
-        return 'carta';
+        return 'paper';
     } else if ( numRand === 2 ) {
-        return 'forbici';
+        return 'scissor';
     }
 }
 
 function getHumanChoice() {
-    let scelta = prompt( "Fai la tua scelta: ' s ' per sasso, ' c ' per carta e ' f ' per forbice ?")?.toLowerCase();  
+    let scelta = prompt( "Take your pick: ' S ' for rock, ' C ' for paper, and ' F ' for scissors." )?.toLowerCase();  
     if (scelta == 's') { 
-        return 'sasso'; 
+        return 'rock'; 
     } else if ( scelta === 'c' ) { 
-        return 'carta';
+        return 'paper';
     } else if ( scelta === 'f' ) {
-        return 'forbici';
+        return 'scissor';
     } else {     
-       alert( "Scelta non valida, inserisci ' s ', ' c ', o ' f '." );
+       alert( "Invalid choice, enter ' S ', ' C ', or ' F '." );
        return getHumanChoice();
     }
 }
@@ -34,24 +34,24 @@ function playGame () {
     }
 function playRound ( humanChoice, computerChoice ) {
     if ( humanChoice == computerChoice ) {
-        alert( `${humanChoice} e ${computerChoice}, stessa scelta, round pareggiato!\nIl tuo punteggio: ${humanScore}\nPunteggio computer: ${computerScore}` );
-    } else if (( humanChoice === 'sasso' && computerChoice === 'forbici' ) 
-        ||     ( humanChoice === 'forbici' && computerChoice === 'carta' ) 
-        ||     ( humanChoice === 'carta' && computerChoice === 'sasso' )) {
+        alert( `${humanChoice} and ${computerChoice}. Same choice, round tied!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
+    } else if (( humanChoice === 'rock' && computerChoice === 'scissor' ) 
+        ||     ( humanChoice === 'scissor' && computerChoice === 'paper' ) 
+        ||     ( humanChoice === 'paper' && computerChoice === 'rock' )) {
         humanScore ++;
-        alert( `Hai vinto il round! ${humanChoice} batte ${computerChoice}\nIl tuo punteggio: ${humanScore}\nPunteggio computer: ${computerScore}` );            
+        alert( `You won the round! ${humanChoice} beats ${computerChoice}.\nYour score: ${humanScore}\nComputer score: ${computerScore}` );            
     } else {
         computerScore ++;
-        alert( `Hai perso il round! ${computerChoice} batte ${humanChoice}\nIl tuo punteggio: ${humanScore}\nPunteggio computer: ${computerScore}` );
+        alert( `You lost the round! ${computerChoice} beats ${humanChoice}.\nYour score : ${humanScore}\nComputer score: ${computerScore}` );
     }
 }
 
 if ( humanScore > computerScore) {
-    alert( `Hai vinto la partita!\nIl tuo punteggio: ${humanScore}\nPunteggio computer: ${computerScore}` );
+    alert( `You won the game!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
 } else if ( computerScore > humanScore) {
-    alert( `Hai perso la partita!\nIl tuo punteggio: ${humanScore}\nPunteggio computer: ${computerScore}` );
+    alert( `You lost the game!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
 } else 
-    alert( `Partita pareggiata!\nIl tuo punteggio: ${humanScore}\nPunteggio computer: ${computerScore}` );
+    alert( `Drawn game!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
 }
 
 playGame();
