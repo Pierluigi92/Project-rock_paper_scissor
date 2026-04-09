@@ -11,11 +11,11 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let scelta = prompt( "Take your pick: ' R ' for rock, ' P ' for paper, and ' S ' for scissors." )?.toLowerCase();  
-    if (scelta == 's') { 
+    if (scelta == 'r') { 
         return 'rock'; 
-    } else if ( scelta === 'c' ) { 
+    } else if ( scelta === 'p' ) { 
         return 'paper';
-    } else if ( scelta === 'f' ) {
+    } else if ( scelta === 's' ) {
         return 'scissor';
     } else {     
        alert( "Invalid choice, enter ' R ', ' P ', or ' S '." );
