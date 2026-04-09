@@ -10,7 +10,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let scelta = prompt( "Take your pick: ' S ' for rock, ' C ' for paper, and ' F ' for scissors." )?.toLowerCase();  
+    let scelta = prompt( "Take your pick: ' R ' for rock, ' P ' for paper, and ' S ' for scissors." )?.toLowerCase();  
     if (scelta == 's') { 
         return 'rock'; 
     } else if ( scelta === 'c' ) { 
@@ -18,7 +18,7 @@ function getHumanChoice() {
     } else if ( scelta === 'f' ) {
         return 'scissor';
     } else {     
-       alert( "Invalid choice, enter ' S ', ' C ', or ' F '." );
+       alert( "Invalid choice, enter ' R ', ' P ', or ' S '." );
        return getHumanChoice();
     }
 }
