@@ -1,57 +1,77 @@
+let humanScore = 0;
+let computerScore = 0;
+let currentRound = 0;
+const cap = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const buttons = document.querySelectorAll(".button");
+const risultati = document.querySelector(".risultati");
+const finalResult = document.querySelector(".final-result");
+const newTextGame = document.querySelector(".new-text");
+
 function getComputerChoice() {
     let numRand = Math.floor(Math.random()* 3);
     if ( numRand === 0 ) { 
         return 'rock'; 
     } else if ( numRand === 1 ) { 
         return 'paper';
-    } else if ( numRand === 2 ) {
+    } else {
         return 'scissor';
     }
-}
+};
 
-function getHumanChoice() {
-    let scelta = prompt( "Take your pick: ' R ' for rock, ' P ' for paper, and ' S ' for scissors." )?.toLowerCase();  
-    if (scelta == 'r') { 
-        return 'rock'; 
-    } else if ( scelta === 'p' ) { 
-        return 'paper';
-    } else if ( scelta === 's' ) {
-        return 'scissor';
-    } else {     
-       alert( "Invalid choice, enter ' R ', ' P ', or ' S '." );
-       return getHumanChoice();
-    }
-}
-
-let humanScore = 0;
-let computerScore = 0;
-
-function playGame () {
-    for ( let round = 0; round < 5; round++ ) { 
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
+buttons.forEach( button => {
+    button.addEventListener('click', () => {
+        risultati.textContent = "";
+        finalResult.textContent = "";
+        newTextGame.innerText = "";
+        if ( humanScore < 5 && computerScore < 5 ) {
+            const humanSelection = button.getAttribute("data-scelta")
+            const computerSelection = getComputerChoice();
+            currentRound++;
+            playRound(humanSelection, computerSelection);
+        } if ( humanScore === 5 || computerScore === 5 ) {
+            winner();
+        }
+    });
+});
+    
 function playRound ( humanChoice, computerChoice ) {
+    const h = cap(humanChoice);
+    const c = cap(computerChoice);
     if ( humanChoice == computerChoice ) {
-        alert( `${humanChoice} and ${computerChoice}. Same choice, round tied!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
+        risultati.innerText = ( `${h} and ${c}. Same choice, round tied!
+            Your score: ${humanScore}
+            Computer score: ${computerScore}
+            Round: ${currentRound}` );
     } else if (( humanChoice === 'rock' && computerChoice === 'scissor' ) 
         ||     ( humanChoice === 'scissor' && computerChoice === 'paper' ) 
         ||     ( humanChoice === 'paper' && computerChoice === 'rock' )) {
         humanScore ++;
-        alert( `You won the round! ${humanChoice} beats ${computerChoice}.\nYour score: ${humanScore}\nComputer score: ${computerScore}` );            
+        risultati.innerText = ( `You won the round! ${h} beats ${c}.
+            Your score: ${humanScore}
+            Computer score: ${computerScore}
+            Round: ${currentRound}` );            
     } else {
         computerScore ++;
-        alert( `You lost the round! ${computerChoice} beats ${humanChoice}.\nYour score : ${humanScore}\nComputer score: ${computerScore}` );
+        risultati.innerText = ( `You lost the round! ${c} beats ${h}.
+        Your score : ${humanScore}
+        Computer score: ${computerScore}
+        Round: ${currentRound}` );
     }
-}
+};
 
-if ( humanScore > computerScore) {
-    alert( `You won the game!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
-} else if ( computerScore > humanScore) {
-    alert( `You lost the game!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
-} else 
-    alert( `Drawn game!\nYour score: ${humanScore}\nComputer score: ${computerScore}` );
-}
-
-playGame();
+function winner() { 
+    if ( humanScore > computerScore) {
+        finalResult.innerText=( `You won the game!
+            Your score: ${humanScore}
+            Computer score: ${computerScore}` );
+            newTextGame.innerText="Make a choice to start a new game";
+    } else {
+        finalResult.innerText=( `You lost the game!
+            Your score: ${humanScore}
+            Computer score: ${computerScore}` );
+            newTextGame.innerText="Make a choice to start a new game.";
+    }
+    humanScore = 0;
+    computerScore = 0;
+    currentRound = 0;
+};
